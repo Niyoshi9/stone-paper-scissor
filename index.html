@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+</head>
+<style>
+h1{
+text-align:center;
+color:blue;
+}
+img{
+height:400px;
+width:400px;
+
+border-radius:200px;
+object-fit:cover;
+
+}
+#common{
+display:flex;
+gap:90px;
+
+}
+.choices{
+padding:10px;
+
+}
+img:hover{
+cursor:pointer;
+border:10px solid cyan;
+}
+#name{
+text-align:center;
+padding:10px;
+font-size:25px;
+color:blue;
+
+}
+#numy{
+font-size:50px;
+}
+#numc{
+font-size:50px;
+
+}
+#score{
+display:flex;
+gap:100px;
+padding-left:600px;
+text-align:center;
+padding-top:50px;
+
+}
+.you{
+text-align:center;
+font-size:30px;
+}
+.comp{
+font-size:30px;
+}
+#msg{
+padding-top:200px;
+
+}
+</style>
+<body>
+<h1> ROCK PAPER AND SCISSORS </h1>
+<div id="common">
+<div class="choices" id="rock">
+
+<img src="https://devyameen.github.io/Rock_Paper_Scissors_Game/rock.png">
+<div id="name"> ROCK
+</div>
+
+</div>
+<div class="choices" id="paper">
+<img src="https://rock-paper-scissor-ankit.netlify.app/paper.png">
+<div id="name" > PAPER
+</div>
+</div>
+<div class="choices" id="scissor">
+<img src="https://anamikaraj03.github.io/Rock-Paper-scissor-Game/scissors.png">
+<div id="name"> SCISSOR
+</div>
+
+</div>
+</div>
+<div id="score">
+<div class="you">
+<p><div id="numy">0</div><br> your score</p>
+</div>
+<div class="comp">
+<p><div id="numc">0</div><br>comp score</p>
+</div><br>
+<div id="msg">
+<p> PLAY YOUR MOVE </p>
+</div>
+
+<script>
+let userscore=0;
+let compscore=0;
+
+const choice=document.querySelectorAll(".choices");
+
+choice.forEach((choices)=>{
+choices.addEventListener("click",()=>{
+const userchoice=choices.getAttribute("id");
+playgame(userchoice);
+});
+});
+
+const userscorepara=document.querySelector("#numy");
+const compscorepara = document.querySelector("#numc");
+
+const msgpara=document.querySelector("#msg");
+const playgame = (userchoice)=>{
+console.log("user choice=",userchoice);
+const compchoice = gencompchoice();
+console.log("comp choice=",compchoice);
+
+if(userchoice===compchoice)
+{
+//draw
+drawgame();
+}
+else{
+let userwin =true;
+if (userchoice==="rock")
+{
+userwin= compchoice==="paper" ? false:true;
+}
+
+else if(userchoice==="paper")
+{
+userwin= compchoice==="rock"? true:false;
+
+}
+else 
+{
+userwin= compchoice==="rock"? false:true;
+}
+showwinner(userwin);
+ }
+};
+const showwinner=(userwin)=>{
+if (userwin) {
+userscore++;
+console.log("You WIN!");
+msgpara.innerText = ${userchoice} +"beats"+ ${compchoice};
+
+userscorepara.innerText = userscore;
+}
+else{
+compscore++;
+compscorepara.innerText = compscore;
+console.log("Comp WIN!");
+msgpara.innerText = ${compchoice}+" beats"+ ${userchoice};
+
+}
+};
+
+const drawgame=()=>{
+console.log("the game was draw");
+}
+
+
+
+const gencompchoice=()=>{
+const options=["rock","paper","scissor"];
+const randidx=Math.floor(Math.random()*3);
+return options[randidx];
+}
+
+
+</script>
+</body>
+</html>
